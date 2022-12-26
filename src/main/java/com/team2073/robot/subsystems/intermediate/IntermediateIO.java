@@ -5,7 +5,7 @@ import org.littletonrobotics.junction.AutoLog;
 public interface IntermediateIO {
 
     @AutoLog
-    public static class IntermediateIOInputs {
+     class IntermediateIOInputs {
         public double bottomMotorOutput;
         public double bottomMotorCurrent;
 
@@ -18,9 +18,9 @@ public interface IntermediateIO {
 
     }
 
-    public default void updateInputs(IntermediateIOInputs inputs) {}
+    default void updateInputs(IntermediateIOInputs inputs) {}
 
-    public default void setOutput(double bottomPercent, double topPercent) {}
+    default void setOutput(double bottomPercent, double topPercent) {}
 
 
 }

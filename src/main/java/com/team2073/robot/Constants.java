@@ -19,7 +19,7 @@ public class Constants {
     public final int CONTROLLER_PORT = 2;
 
 
-    private static final RobotType robot = RobotType.ROBOT_TEST;
+    private static final RobotType robot = RobotType.ROBOT_REAL;
     public static final double loopPeriodSecs = 0.02;
 
 //    private static final Alert invalidRobotAlert =
@@ -27,12 +27,12 @@ public class Constants {
 //                    AlertType.ERROR);
 
     public static RobotType getRobot() {
-        return isPracticeBot ? RobotType.ROBOT_PRACTICE : RobotType.ROBOT_TEST;
+        return isPracticeBot ? RobotType.ROBOT_PRACTICE : RobotType.ROBOT_REAL;
     }
 
     public static Mode getMode() {
         switch (getRobot()) {
-            case ROBOT_TEST:
+            case ROBOT_REAL:
                 return RobotBase.isReal() ? Mode.REAL : Mode.SIM;
 
             case ROBOT_SIMBOT:
@@ -61,10 +61,10 @@ public class Constants {
         public static final int SECOND_INPUT_PORT = 9;
     }
     public static final Map<RobotType, String> logFolders =
-            Map.of(RobotType.ROBOT_TEST, "/media/sda2");
+            Map.of(RobotType.ROBOT_REAL, "/media/sda2");
 
     public static enum RobotType {
-        ROBOT_TEST, ROBOT_SIMBOT, ROBOT_PRACTICE;
+        ROBOT_REAL, ROBOT_SIMBOT, ROBOT_PRACTICE;
     }
 
     public static enum Mode {

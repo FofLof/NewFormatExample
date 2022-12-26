@@ -1,7 +1,5 @@
 package com.team2073.robot.subsystems.intake;
 
-import com.ctre.phoenix.sensors.CANCoder;
-import com.revrobotics.CANSparkMax;
 import com.team2073.common.controlloop.PidfControlLoop;
 import com.team2073.common.periodic.AsyncPeriodicRunnable;
 import com.team2073.common.util.LoggedTunableNumber;
@@ -9,10 +7,9 @@ import com.team2073.robot.ApplicationContext;
 
 import com.team2073.robot.Constants;
 import com.team2073.robot.subsystems.intermediate.IntermediateSubsystem;
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import lombok.Setter;
-
-import java.io.Console;
+import org.littletonrobotics.junction.LogTable;
 
 @Setter
 public class IntakeSubsystem implements AsyncPeriodicRunnable {
@@ -42,17 +39,28 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
         this.io = io;
         autoRegisterWithPeriodicRunner(10);
         switch (Constants.getRobot()) {
-            case ROBOT_TEST:
+            case ROBOT_REAL:
                 intakePid = new PidfControlLoop(0.02, 0, .001, 0, .3);
+                kP.initDefault(0.02);
+                kI.initDefault(0);
+                kD.initDefault(0.001);
                 break;
             case ROBOT_PRACTICE:
-                //If we had practice bot that wasn't murdered
+                //If we had a practice bot that wasn't murdered
                 intakePid = new PidfControlLoop(0, 0, 0, 0, 0);
+                kP.initDefault(0);
+                kI.initDefault(0);
+                kD.initDefault(0);
                 break;
             case ROBOT_SIMBOT:
                 //For tuning simulation PIDs
                 intakePid = new PidfControlLoop(0, 0, 0, 0, 0);
+                kP.initDefault(0);
+                kI.initDefault(0);
+                kD.initDefault(0);
                 break;
+            default:
+                throw new RuntimeException("Error initializing Intake Subsystem");
         }
         intakePid.setPositionSupplier(() -> inputs.canCoderPosition);
         enableTuningMode(Constants.tuningMode);
@@ -116,7 +124,7 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
                 break;
         }
         io.setIntakeOutput(output);
-        io.setPivotOutputs(-pivotOutput);
+        io.setPivotOutputs(pivotOutput);
     }
 
     public void pivot(double position) {

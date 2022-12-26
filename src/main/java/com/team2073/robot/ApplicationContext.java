@@ -10,7 +10,6 @@ import com.team2073.robot.subsystems.intermediate.IntermediateIOReal;
 import com.team2073.robot.subsystems.intermediate.IntermediateIOSim;
 import com.team2073.robot.subsystems.intermediate.IntermediateSubsystem;
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lombok.Getter;
 
 @Getter
@@ -38,7 +37,7 @@ public class ApplicationContext {
 
     public void initializeObjects() {
         switch (Constants.getRobot()) {
-            case ROBOT_TEST:
+            case ROBOT_REAL:
                 intermediateTopMasterMotor = new CANSparkMax(Constants.IntermediateConstants.INTERMEDIATE_TOP_MASTER_MOTOR_PORT, MotorType.kBrushless);
                 intermediateTopSlaveMotor = new CANSparkMax(Constants.IntermediateConstants.INTERMEDIATE_TOP_SLAVE_MOTOR_PORT, MotorType.kBrushless);
                 intermediateBottomMotor = new CANSparkMax(Constants.IntermediateConstants.INTERMEDIATE_BOTTOM_MOTOR_PORT, MotorType.kBrushless);

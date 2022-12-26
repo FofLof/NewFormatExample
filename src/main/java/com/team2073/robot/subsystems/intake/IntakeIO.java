@@ -5,7 +5,7 @@ import org.littletonrobotics.junction.AutoLog;
 public interface IntakeIO {
 
     @AutoLog
-    public static class IntakeIOInputs {
+    class IntakeIOInputs {
         public double canCoderPosition;
         public double motorMasterCurrentDraw;
         public double pivotMotorCurrentDraw;
@@ -16,11 +16,10 @@ public interface IntakeIO {
         public boolean photoEyeBack;
     }
 
-    public default void updateInputs(IntakeIOInputs inputs) {}
+    default void updateInputs(IntakeIOInputs inputs) {}
 
-    public default void setIntakeOutput(double output) {}
+    default void setIntakeOutput(double output) {}
 
-    public default void setPivotOutputs(double output) {}
+    default void setPivotOutputs(double output) {}
 
-    public default void configurePID(double p, double i, double d) {}
 }
