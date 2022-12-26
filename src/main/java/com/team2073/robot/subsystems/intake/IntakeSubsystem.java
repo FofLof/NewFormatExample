@@ -10,6 +10,8 @@ import com.team2073.robot.subsystems.intermediate.IntermediateSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 import lombok.Setter;
 import org.littletonrobotics.junction.LogTable;
+import org.littletonrobotics.junction.LoggedRobot;
+import org.littletonrobotics.junction.Logger;
 
 @Setter
 public class IntakeSubsystem implements AsyncPeriodicRunnable {
@@ -36,6 +38,7 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
 
     IntakeIO io;
     public IntakeSubsystem(IntakeIO io) {
+
         this.io = io;
         autoRegisterWithPeriodicRunner(10);
         switch (Constants.getRobot()) {
@@ -71,6 +74,7 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
             intakePid.setPID(kP.get(), kI.get(), kD.get());
         }
         io.updateInputs(inputs);
+        Logger.getInstance().processInputs("Intake", inputs);
         switch (currentRollerState) {
             case STOP:
                 output = 0;

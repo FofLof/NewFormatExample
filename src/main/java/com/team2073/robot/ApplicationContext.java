@@ -11,6 +11,7 @@ import com.team2073.robot.subsystems.intermediate.IntermediateIOSim;
 import com.team2073.robot.subsystems.intermediate.IntermediateSubsystem;
 import edu.wpi.first.wpilibj.*;
 import lombok.Getter;
+import org.littletonrobotics.junction.LogTable;
 
 @Getter
 public class ApplicationContext {

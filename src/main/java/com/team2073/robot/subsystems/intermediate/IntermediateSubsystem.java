@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import lombok.Getter;
 import lombok.Setter;
+import org.littletonrobotics.junction.Logger;
 
 @Getter
 @Setter
@@ -36,6 +37,7 @@ public class IntermediateSubsystem implements AsyncPeriodicRunnable {
     @Override
     public void onPeriodicAsync() {
         io.updateInputs(inputs);
+        Logger.getInstance().processInputs("Intermediate", inputs);
         io.setOutput(state.getBottomPercent(), state.getTopPercent());
     }
 
