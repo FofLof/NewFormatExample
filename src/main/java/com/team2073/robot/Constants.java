@@ -2,6 +2,7 @@ package com.team2073.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;
 
+import java.awt.*;
 import java.util.Map;
 
 public class Constants {
@@ -27,6 +28,7 @@ public class Constants {
 //                    AlertType.ERROR);
 
     public static RobotType getRobot() {
+        if (RobotBase.isSimulation()) return RobotType.ROBOT_SIMBOT;
         return isPracticeBot ? RobotType.ROBOT_PRACTICE : RobotType.ROBOT_REAL;
     }
 
@@ -68,6 +70,6 @@ public class Constants {
     }
 
     public static enum Mode {
-        REAL, REPLAY, SIM
+        REAL, REPLAY, SIM, PRACTICE
     }
 }

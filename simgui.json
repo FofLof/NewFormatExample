@@ -32,8 +32,13 @@
     "Retained Values": {
       "open": false
     },
-    "Transitory Values": {
-      "open": false
+    "transitory": {
+      "SmartDashboard": {
+        "Status": {
+          "open": true
+        },
+        "open": true
+      }
     }
   },
   "NetworkTables Info": {

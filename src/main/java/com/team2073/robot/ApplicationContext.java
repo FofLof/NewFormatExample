@@ -11,7 +11,8 @@ import com.team2073.robot.subsystems.intermediate.IntermediateIOSim;
 import com.team2073.robot.subsystems.intermediate.IntermediateSubsystem;
 import edu.wpi.first.wpilibj.*;
 import lombok.Getter;
-import org.littletonrobotics.junction.LogTable;
+
+import static com.team2073.robot.Constants.RobotType.*;
 
 @Getter
 public class ApplicationContext {
@@ -37,10 +38,10 @@ public class ApplicationContext {
     private CANSparkMax intakeMotorPivot;
     private CANCoder intakeCANCoder;
 
-
     public void initializeObjects() {
         controller = new Joystick(Constants.CONTROLLER_PORT);
         switch (Constants.getRobot()) {
+            case ROBOT_SIMBOT:
             case ROBOT_REAL:
                 intermediateTopMasterMotor = new CANSparkMax(Constants.IntermediateConstants.INTERMEDIATE_TOP_MASTER_MOTOR_PORT, MotorType.kBrushless);
                 intermediateTopSlaveMotor = new CANSparkMax(Constants.IntermediateConstants.INTERMEDIATE_TOP_SLAVE_MOTOR_PORT, MotorType.kBrushless);
@@ -63,6 +64,7 @@ public class ApplicationContext {
                 throw new RuntimeException("Error initialzing robot");
         }
     }
+
 
 
     public IntermediateSubsystem getIntermediateSubsystem() {

@@ -57,10 +57,10 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
                 break;
             case ROBOT_SIMBOT:
                 //For tuning simulation PIDs
-                intakePid = new PidfControlLoop(0, 0, 0, 0, 0);
-                kP.initDefault(0);
+                intakePid = new PidfControlLoop(0.02, 0, 0.001, 0, 1);
+                kP.initDefault(0.02);
                 kI.initDefault(0);
-                kD.initDefault(0);
+                kD.initDefault(0.001);
                 break;
             default:
                 throw new RuntimeException("Error initializing Intake Subsystem");
@@ -68,9 +68,9 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
         intakePid.setPositionSupplier(() -> inputs.canCoderPosition);
         enableTuningMode(Constants.tuningMode);
     }
+
     @Override
     public void onPeriodicAsync() {
-        System.out.println(output);
         if (kP.hasChanged() || kI.hasChanged() || kD.hasChanged()) {
             intakePid.setPID(kP.get(), kI.get(), kD.get());
         }
@@ -128,8 +128,12 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
             case STOP:
                 break;
         }
+
+        Logger.getInstance().recordOutput("IntermediateSubsystem/PositionState", currentPositionState.ordinal());
+
+        System.out.println(pivotOutput);
         io.setIntakeOutput(output);
-        io.setPivotOutputs(pivotOutput);
+        io.setPivotOutputs(-pivotOutput);
     }
 
     public void pivot(double position) {

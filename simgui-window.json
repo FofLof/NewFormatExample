@@ -1,13 +1,13 @@
 {
   "MainWindow": {
     "GLOBAL": {
-      "height": "720",
+      "height": "863",
       "maximized": "0",
       "style": "0",
       "userScale": "2",
-      "width": "1280",
-      "xpos": "34",
-      "ypos": "57"
+      "width": "1466",
+      "xpos": "-32000",
+      "ypos": "-32000"
     }
   },
   "Table": {
@@ -36,7 +36,7 @@
     },
     "###NetworkTables": {
       "Collapsed": "0",
-      "Pos": "250,277",
+      "Pos": "251,277",
       "Size": "750,185"
     },
     "###NetworkTables Info": {
@@ -47,7 +47,7 @@
     "###Other Devices": {
       "Collapsed": "0",
       "Pos": "1026,20",
-      "Size": "250,695"
+      "Size": "422,778"
     },
     "###System Joysticks": {
       "Collapsed": "0",

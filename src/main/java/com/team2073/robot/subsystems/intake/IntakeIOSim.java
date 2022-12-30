@@ -23,12 +23,12 @@ public class IntakeIOSim implements IntakeIO{
         intakeCancoder.setPositionToAbsolute();
         intakeMaster.setInverted(true);
         intakeSlave.setInverted(false);
-        intakePivot.setInverted(true);
+//        intakePivot.setInverted(true);
     }
 
     @Override
     public void updateInputs(IntakeIOInputs inputs) {
-        inputs.canCoderPosition = intakeCancoder.getPosition();
+        inputs.canCoderPosition = intakePivot.getEncoder().getPosition();
         inputs.motorMasterCurrentDraw = intakeMaster.getOutputCurrent();
         inputs.pivotMotorCurrentDraw = intakePivot.getOutputCurrent();
         inputs.motorMasterOutput = intakeMaster.getAppliedOutput();

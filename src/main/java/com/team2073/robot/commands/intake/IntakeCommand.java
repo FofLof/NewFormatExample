@@ -1,6 +1,7 @@
 package com.team2073.robot.commands.intake;
 
 import com.team2073.common.command.AbstractLoggingCommand;
+import com.team2073.common.util.KeyboardInputStatus;
 import com.team2073.robot.ApplicationContext;
 import com.team2073.robot.subsystems.intake.IntakeSubsystem;
 import com.team2073.robot.subsystems.intermediate.IntermediateSubsystem;
@@ -10,9 +11,11 @@ public class IntakeCommand extends AbstractLoggingCommand {
     IntakeSubsystem intakeSubsystem = appCTX.getIntakeSubsystem();
     IntermediateSubsystem intermediateSubsystem = appCTX.getIntermediateSubsystem();
 
+
     @Override
     protected void initializeDelegate() {
         intakeSubsystem.setCurrentRollerState(IntakeSubsystem.IntakeRollerState.INTAKE);
+
     }
 
     @Override
