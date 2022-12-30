@@ -16,7 +16,7 @@ import org.littletonrobotics.junction.Logger;
 @Setter
 public class IntakeSubsystem implements AsyncPeriodicRunnable {
     private final ApplicationContext appCTX = ApplicationContext.getInstance();
-    private IntermediateSubsystem intermediateSubsystem = appCTX.getIntermediateSubsystem();
+    private IntermediateSubsystem intermediateSubsystem;
     private static final double MAX_POSITION = 89.121;
     private static final double RETRACTED_POSITION = 134.033;
 
@@ -38,7 +38,7 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
 
     IntakeIO io;
     public IntakeSubsystem(IntakeIO io) {
-
+        intermediateSubsystem = appCTX.getIntermediateSubsystem();
         this.io = io;
         autoRegisterWithPeriodicRunner(10);
         switch (Constants.getRobot()) {
@@ -70,6 +70,7 @@ public class IntakeSubsystem implements AsyncPeriodicRunnable {
     }
     @Override
     public void onPeriodicAsync() {
+        System.out.println(output);
         if (kP.hasChanged() || kI.hasChanged() || kD.hasChanged()) {
             intakePid.setPID(kP.get(), kI.get(), kD.get());
         }

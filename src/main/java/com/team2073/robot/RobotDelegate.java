@@ -15,6 +15,7 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
 public class RobotDelegate extends AbstractRobotDelegate {
     private SampleSubsystem sampleSubsystem = new SampleSubsystem();
+    private OperatorInterface oi;
     ApplicationContext appCTX;
     private Logger logger;
     public RobotDelegate(double period) {
@@ -25,6 +26,7 @@ public class RobotDelegate extends AbstractRobotDelegate {
     public void robotInit() {
         appCTX = ApplicationContext.getInstance();
         appCTX.initializeObjects();
+        oi = new OperatorInterface();
         logger = Logger.getInstance();
 
         switch (Constants.getMode()) {
@@ -51,6 +53,7 @@ public class RobotDelegate extends AbstractRobotDelegate {
                 break;
         }
         logger.start();
+        oi.init();
     }
 
     @Override

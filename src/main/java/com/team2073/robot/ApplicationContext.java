@@ -18,6 +18,8 @@ public class ApplicationContext {
 
     private static ApplicationContext instance;
 
+    private Joystick controller;
+
     //IntermediateSubsystem
     private CANSparkMax intermediateTopMasterMotor;
     private CANSparkMax intermediateTopSlaveMotor;
@@ -37,6 +39,7 @@ public class ApplicationContext {
 
 
     public void initializeObjects() {
+        controller = new Joystick(Constants.CONTROLLER_PORT);
         switch (Constants.getRobot()) {
             case ROBOT_REAL:
                 intermediateTopMasterMotor = new CANSparkMax(Constants.IntermediateConstants.INTERMEDIATE_TOP_MASTER_MOTOR_PORT, MotorType.kBrushless);
@@ -59,19 +62,23 @@ public class ApplicationContext {
             default:
                 throw new RuntimeException("Error initialzing robot");
         }
-
-        initializeSubsystems();
     }
 
-    public void initializeSubsystems() {
-        if (RobotBase.isSimulation()) {
-            intakeSubsystem = new IntakeSubsystem(new IntakeIOSim());
-            intermediateSubsystem = new IntermediateSubsystem(new IntermediateIOSim());
-        } else {
-            intermediateSubsystem = new IntermediateSubsystem(new IntermediateIOReal());
-            intakeSubsystem = new IntakeSubsystem(new IntakeIOReal());
-        }
 
+    public IntermediateSubsystem getIntermediateSubsystem() {
+        if (intermediateSubsystem == null) {
+            intermediateSubsystem = RobotBase.isSimulation() ? new IntermediateSubsystem(new IntermediateIOSim()) :
+                    new IntermediateSubsystem(new IntermediateIOReal());
+        }
+        return intermediateSubsystem;
+    }
+
+    public IntakeSubsystem getIntakeSubsystem() {
+        if (intakeSubsystem == null) {
+            intakeSubsystem = RobotBase.isSimulation() ? new IntakeSubsystem(new IntakeIOSim()) :
+                    new IntakeSubsystem(new IntakeIOReal());
+        }
+        return intakeSubsystem;
     }
 
     public static ApplicationContext getInstance() {

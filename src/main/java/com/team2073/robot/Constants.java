@@ -16,7 +16,7 @@ public class Constants {
     //Controllers
     public final int WHEEL_PORT = 0;
     public final int JOYSTICK_PORT = 1;
-    public final int CONTROLLER_PORT = 2;
+    public static final int CONTROLLER_PORT = 2;
 
 
     private static final RobotType robot = RobotType.ROBOT_REAL;
